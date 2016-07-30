@@ -1,0 +1,67 @@
+<div class="login-container">
+    <div class="center">
+        <h1>
+            <div class="logo-top "></div>
+            <span class="white" id="id-text2">PAD Systems</span>
+        </h1>
+        <h4 class="blue" id="id-company-text">&copy; CRM</h4>
+    </div>
+
+    <div class="space-6"></div>
+
+    <div class="position-relative">
+        <div id="login-box" class="login-box visible widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header blue lighter bigger">
+                        <i class="ace-icon fa fa-coffee green"></i>
+                        Por favor, ingresa tu datos
+                    </h4>
+                    <div class="space-6"></div>
+
+                    <form method="POST">
+                        <fieldset>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input name="identity" type="text" class="form-control" placeholder="Usuario" />
+                                    <i class="ace-icon fa fa-user"></i>
+                                </span>
+                            </label>
+                            <?php if ($this->formElementErrors($form->get('identity'))): ?>
+                                <span class="help-inline">
+                                    <?php echo $this->formElementErrors($form->get('identity')) ?>
+                                </span>
+                            <?php endif; ?>
+                            <label class="block clearfix">
+                                <span class="block input-icon input-icon-right">
+                                    <input name="credential" type="password" class="form-control" placeholder="Contraseña" />
+                                    <i class="ace-icon fa fa-lock"></i>
+                                </span>
+                            </label>
+                            <?php if ($this->formElementErrors($form->get('credential'))): ?>
+                                <span class="help-inline">
+                                    <?php echo $this->formElementErrors($form->get('credential')) ?>
+                                </span>
+                            <?php endif; ?>
+                            <div class="space"></div>
+
+                            <div class="clearfix">
+                                <label class="inline">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"> Recordarme</span>
+                                </label>
+
+                                <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                    <i class="ace-icon fa fa-key"></i>
+                                    <span class="bigger-110">Login</span>
+                                </button>
+                            </div>
+
+                            <div class="space-4"></div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

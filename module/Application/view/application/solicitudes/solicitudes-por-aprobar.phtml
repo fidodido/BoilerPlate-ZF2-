@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h1>
+        Solicitudes
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Por Aprobar
+        </small>
+    </h1>
+</div>
+<table class="table table-condensed">
+    <tr>
+        <th>Fecha Solicitud</th>
+        <th>Nombre Solicitante</th>
+        <th>Estado</th>
+        <th>Tipo</th>
+        <th>Observación</th>
+    </tr>
+    <tbody>
+        <?php foreach ($solicitudesPendientes as $s): ?>
+            <tr>
+                <td>
+                    <?php if ($s->getTipo()->getCodigo() == \Application\Model\Entity\Solicitud::TIPO_VACACIONES): ?>
+                        <a href="<?php echo $this->url('application/default', array('controller' => 'vacaciones', 'action' => 'detalle'), array('query' => array('id' => $s->getIdSolicitud(), 'tipo' => $s->getTipo()->getCodigo()))); ?>"><?php echo $s->getFechaIngreso(); ?></a>
+                    <?php endif; ?>
+                    <?php if ($s->getTipo()->getCodigo() == \Application\Model\Entity\Solicitud::TIPO_ANTICIPO): ?>
+                        <a href="<?php echo $this->url('application/default', array('controller' => 'anticipos', 'action' => 'detalle'), array('query' => array('id' => $s->getIdSolicitud(), 'tipo' => $s->getTipo()->getCodigo()))); ?>"><?php echo $s->getFechaIngreso(); ?></a>
+                    <?php endif; ?>
+                </td>
+                <td><?php echo $s->getNombreTrabajador(); ?></td>
+                <td>
+                    <?php if ($s->getEstado()->getCod() == 'PENDIENTE'): ?>
+                        <span class="label label-warning arrowed arrowed-right"><?php echo $s->getEstado()->getDescripcion(); ?></span>
+                    <?php elseif ($s->getEstado()->getCod() == 'ACEPTADO'): ?>
+                        <span class="label label-success arrowed-in arrowed-in-right"><?php echo $s->getEstado()->getDescripcion(); ?></span>
+                    <?php elseif ($s->getEstado()->getCod() == 'RECHAZADO'): ?>
+                        <span class="label label-danger arrowed-in arrowed-in-right"><?php echo $s->getEstado()->getDescripcion(); ?></span>
+                    <?php elseif ($s->getEstado()->getCod() == 'ANULADO'): ?>
+                        <span class="label label-inverse arrowed arrowed-in-right"><?php echo $s->getEstado()->getCod(); ?></span>
+                    <?php endif; ?>
+                </td>
+                <td><?php echo $s->getTipo()->getNombre(); ?></td>
+                <td><?php echo $s->getObservaciones(); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

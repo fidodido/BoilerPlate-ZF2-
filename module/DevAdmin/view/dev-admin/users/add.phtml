@@ -1,0 +1,141 @@
+<style>
+
+    #available-permission {
+        list-style-type: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #available-permission li, #assigned-permission li {
+        list-style-type: none;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #available-permission li:hover {
+        background: #64FE2E;
+    }
+
+    #assigned-permission li:hover {
+        background: #d43f3a;
+    }
+
+    #assigned-permission {
+        cursor: pointer;
+        list-style-type: none;
+        font-size: 16px;
+    }
+
+    #assigned-permission {
+        list-style-type: none;
+        font-size: 16px;
+    }
+
+</style>
+<h3>Agregar Usuario</h3>
+<hr>
+
+<br>
+
+<form method="POST" action="<?php echo $this->url('devadmin/default', array('controller' => 'users', 'action' => 'add')); ?>">
+
+    <div class="row">
+
+        <div class="form-group col-md-3" id="controller-container">
+            <label><?php echo $this->formLabel($form->get('username')); ?></label>
+            <?php echo $this->formElement($form->get('username')); ?>
+            <?php if ($this->formElementErrors($form->get('username'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('username')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Asignacion de Roles
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-condensed">
+                        <ul id="available-permission">
+                            <?php foreach ($rolesAvailable as $index => $rol): ?>
+                                <li data-id="<?php echo $rol->getIdRol(); ?>">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span><?php echo $rol->getName(); ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-condensed">
+                        <ul id="assigned-permission" >
+                        </ul>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            <span>Guardar</span>
+        </button>
+        <a href="<?php echo $this->url('devadmin/default', array('controller' => 'users', 'action' => 'index')); ?>" class="btn btn-default">
+            <span class="glyphicon glyphicon-share-alt"></span>
+            <span>Cancelar</span>
+        </a>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function() {
+
+        var app = {
+            //
+            //
+            init: function() {
+
+                var self = this;
+
+                $('#available-permission').on('click', 'li', function() {
+                    self.asignarPermiso(this);
+                });
+
+                $('#assigned-permission').on('click', 'li', function() {
+                    self.quitarPermiso(this);
+                });
+
+            },
+            //
+            //
+            asignarPermiso: function(el) {
+
+                var idPermission = $(el).data('id');
+
+                var input = document.createElement('input');
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "roles[id][]");
+                input.setAttribute("value", idPermission);
+
+                $(el).prepend(input);
+                $("#assigned-permission").append(el);
+            },
+            //
+            //
+            quitarPermiso: function(el) {
+                el.remove();
+                $(el).find('input').remove();
+                $("#available-permission").append(el);
+            }
+        }
+
+        app.init();
+
+    });
+</script>

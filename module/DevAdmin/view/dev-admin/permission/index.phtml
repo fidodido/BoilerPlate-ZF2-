@@ -1,0 +1,58 @@
+<h3>Permisos</h3>
+<hr>
+
+<?php foreach ($this->messages as $msg): ?>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Oye!</strong> <?php echo $msg['msg']; ?>
+    </div>
+<?php endforeach; ?>
+
+<div class="panel panel-default">
+    <div class="panel panel-body">
+        <form id="add-menu-option" method="POST" action="<?php echo $this->url('devadmin/default', array('controller' => 'permission', 'action' => 'index')); ?>">
+
+            <div class="row">
+
+                <div class="form-group col-md-3">
+                    <label><?php echo $this->formLabel($form->get('name')); ?></label>
+                    <?php echo $this->formElement($form->get('name')); ?>
+                    <?php if ($this->formElementErrors($form->get('name'))): ?>
+                        <span class="help-inline">
+                            <?php echo $this->formElementErrors($form->get('name')) ?>
+                        </span>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-sm btn-success">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>
+                    <span>Guardar</span>
+                </button>
+                <button type="submit" class="btn btn-sm btn-default">
+                    <span class="glyphicon glyphicon-share-alt"></span>
+                    <span>Cancelar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-condensed">
+    <thead>
+        <tr class="warning">
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php foreach ($permission as $per): ?>
+            <tr>
+                <td><?php echo $per->getName(); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+

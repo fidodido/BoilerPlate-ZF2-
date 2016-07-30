@@ -1,0 +1,39 @@
+<h3>Roles</h3>
+
+<?php foreach ($this->messages as $msg): ?>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Oye!</strong> <?php echo $msg['msg']; ?>
+    </div>
+<?php endforeach; ?>
+
+<hr>
+<a class="btn btn-primary" href="<?php echo $this->url('devadmin/default', array('controller' => 'roles', 'action' => 'add')); ?>">
+    <span class="glyphicon glyphicon-plus-sign"></span>
+    Agregar
+</a>
+
+<hr>
+
+
+<table class="table table-condensed">
+    <thead>
+        <tr class="warning">
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($roles as $rol): ?>
+            <tr>
+                <td><?php echo $rol->getName(); ?></td>
+                <td><?php echo $rol->getDescription(); ?></td>
+                <td>
+                    <a href="<?php echo $this->url('devadmin/default', array('controller' => 'roles', 'action' => 'edit'), array('query' => array('id' => $rol->getIdRol()))); ?>">Editar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+

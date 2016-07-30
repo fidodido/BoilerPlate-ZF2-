@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-md-8">
+        <div class="widget-box transparent">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-star orange"></i>
+                    Últimas Solicitudes Pendientes
+                </h4>
+
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body" style="display: block;">
+                <div class="widget-main no-padding">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thin-border-bottom">
+                            <tr>
+                                <th>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Fecha Solicitud
+                                </th>
+
+                                <th>
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Tipo
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($solicitudes as $s): ?>
+                                <?php if ($s->getEstado()->getCod() == "PENDIENTE"): ?>
+                                    <tr>
+                                        <td>
+                                            <?php if ($s->getTipo()->getCodigo() == \Application\Model\Entity\Solicitud::TIPO_VACACIONES): ?>
+                                                <a href="<?php echo $this->url('application/default', array('controller' => 'vacaciones', 'action' => 'detalle'), array('query' => array('id' => $s->getIdSolicitud(), 'tipo' => $s->getTipo()->getCodigo()))); ?>"><?php echo $s->getFechaIngreso(); ?></a>
+                                            <?php endif; ?>
+                                            <?php if ($s->getTipo()->getCodigo() == \Application\Model\Entity\Solicitud::TIPO_ANTICIPO): ?>
+                                                <a href="<?php echo $this->url('application/default', array('controller' => 'anticipos', 'action' => 'detalle'), array('query' => array('id' => $s->getIdSolicitud(), 'tipo' => $s->getTipo()->getCodigo()))); ?>"><?php echo $s->getFechaIngreso(); ?></a>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo $s->getTipo()->getNombre(); ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4 class="header green">Cumplen en <?php echo $months[date('m')]; ?>: </h4>
+        <ul>
+            <?php foreach ($cumpleanos as $cumple): ?>
+                <?php if ($cumple->getMonth() == date('m')): ?>
+                    <li style="list-style-type: none; margin: 5px;">
+                        <i style="color: #E07F69" class="fa fa-birthday-cake"></i>
+                        <span><?php echo $cumple->getNombre(); ?></span>
+                        <span style="margin-left: 5px; margin-right: 5px;">-</span>
+                        <span>Cumple el:</span>
+                        <span><?php echo $cumple->getFechaNacimiento(); ?></span>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>

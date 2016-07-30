@@ -1,0 +1,159 @@
+<h3>Agregar Opción</h3>
+<hr>
+
+<?php foreach ($this->messages as $msg): ?>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Oye!</strong> <?php echo $msg['msg']; ?>
+    </div>
+<?php endforeach; ?>
+
+<form id="add-menu-option" method="POST" action="<?php echo $this->url('devadmin/default', array('controller' => 'navigation', 'action' => 'add'), array('query' => array('parent' => $parent))); ?>">
+
+    <div class="form-group">
+        <?php echo $this->formElement($form->get('type')); ?>
+    </div>
+
+    <div class="row">
+
+        <?php echo $this->formElement($form->get('route')); ?>
+
+        <div class="form-group col-md-12">
+            <label><?php echo $this->formLabel($form->get('label')); ?></label>
+            <?php echo $this->formElement($form->get('label')); ?>
+            <?php if ($this->formElementErrors($form->get('label'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('label')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label><?php echo $this->formLabel($form->get('icon')); ?></label>
+            <?php echo $this->formElement($form->get('icon')); ?>
+            <?php if ($this->formElementErrors($form->get('icon'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('icon')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-12" id="url-container">
+            <label><?php echo $this->formLabel($form->get('url')); ?></label>
+            <?php echo $this->formElement($form->get('url')); ?>
+            <?php if ($this->formElementErrors($form->get('url'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('url')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+
+        <div class="form-group col-md-12" id="controller-container">
+            <label><?php echo $this->formLabel($form->get('controller')); ?></label>
+            <?php echo $this->formElement($form->get('controller')); ?>
+            <?php if ($this->formElementErrors($form->get('controller'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('controller')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-12" id="action-container">
+            <label><?php echo $this->formLabel($form->get('action')); ?></label>
+            <?php echo $this->formElement($form->get('action')); ?>
+            <?php if ($this->formElementErrors($form->get('action'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('action')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label><?php echo $this->formLabel($form->get('parent')); ?></label>
+            <?php echo $this->formElement($form->get('parent')); ?>
+            <?php if ($this->formElementErrors($form->get('parent'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('parent')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-sm btn-success">
+            <span class="glyphicon glyphicon-floppy-save"></span>
+            <span>Guardar</span>
+        </button>
+        <a href="<?php echo $this->url('devadmin/default', array('controller' => 'navigation', 'action' => 'index')); ?>" class="btn btn-sm btn-default">
+            <span class="glyphicon glyphicon-share-alt"></span>
+            <span>Cancelar</span>
+        </a>
+    </div>
+</form>
+
+<hr>
+<script>
+    $(document).ready(function () {
+
+        var EXTERNAL_URL = "URI";
+        var INTERNAL_URL = 'MVC';
+
+        var app = {
+            //
+            //
+            init: function () {
+
+                var self = this;
+
+                var optionTypeChecked = $('input[name=type]:checked').val();
+                this.hideElements(optionTypeChecked);
+
+                $('input[type=radio][name=type]').change(function () {
+                    self.resetForm();
+                    self.hideElements(this.value);
+                });
+
+                $("#icon-input").select2({
+                    templateResult: function (field) {
+                        return '<span class="glyphicon glyphicon-' + field.text + '">' + field.text + '</span>';
+                    }
+                });
+            },
+            //
+            //
+            resetForm: function () {
+                $('input[type=text][name=label]').val('');
+                $('input[type=text][name=url]').val('');
+                $('input[type=text][name=controller]').val('');
+                $('input[type=text][name=action]').val('');
+                $('input[type=text][name=route]').val('');
+            },
+            //
+            //
+            hideElements: function (value) {
+
+                switch (value) {
+                    case INTERNAL_URL:
+                        $('input[type=text][name=url]').val('');
+                        $('#url-container').hide();
+                        $('#controller-container').show();
+                        $('#action-container').show();
+                        break;
+                    case EXTERNAL_URL:
+                        $('input[type=text][name=url]').val('');
+                        $('#url-container').show();
+                        $('#controller-container').hide();
+                        $('#action-container').hide();
+                        break;
+                }
+            }
+
+        };
+
+        app.init();
+
+
+    });
+</script>
+

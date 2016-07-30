@@ -1,0 +1,77 @@
+<div class="page-header">
+    <h1>
+        Certificados Disponibles
+    </h1>
+</div>
+
+<table class="table" style="font-size: 15px">
+    <tr>
+        <td>
+            <i class="fa fa-file-pdf-o"></i>
+            <span>Certificado de Renta</span>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'RENTA'))); ?>" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+                Sin Firma
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'RENTA', 'firma' => 1))); ?>" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+                Con Firma
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <i class="fa fa-file-pdf-o"></i>
+            <span>Certificado de Antiguedad</span>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'ANTIGUEDAD'))); ?>" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+                Sin Firma
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'ANTIGUEDAD', 'firma' => 1))); ?>" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+                Con Firma
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <i class="fa fa-file-pdf-o"></i>
+            <span>Certificado de Antiguedad con Renta</span>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'ANTIGRENTA'))); ?>" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+                Sin Firma
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'ANTIGRENTA', 'firma' => 1))); ?>" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+                Con Firma
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <i class="fa fa-file-pdf-o"></i>
+            <span>Certificado de Vacaciones</span>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'CERTVACA'))); ?>" class="btn btn-white btn-info btn-bold">
+                <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+                Sin Firma
+            </a>
+        </td>
+        <td>
+            --
+        </td>
+    </tr>
+</table>

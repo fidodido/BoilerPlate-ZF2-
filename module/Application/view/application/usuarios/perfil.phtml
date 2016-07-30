@@ -1,0 +1,209 @@
+<?php //d($ficha->retorno[0]->trab_rut); ?>
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            Mi Ficha Personal
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+
+            <div>
+                <div id="user-profile-1" class="user-profile row">
+                    <div class="col-xs-12 col-sm-3 center">
+                        <div>
+                            <span class="profile-picture">
+                                <img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="<?php echo $this->basePath('/avatars/profile-pic.jpg') ?>" />
+                            </span>
+
+                            <div class="space-4"></div>
+
+                            <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                                <div class="inline position-relative">
+                                    
+                                        <i class="ace-icon fa fa-circle light-green"></i>
+                                        &nbsp;
+                                        <span class="white"><?php echo $ficha->retorno[0]->trab_nombres; ?></span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-6"></div>
+
+                    </div>
+
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="profile-user-info profile-user-info-striped">
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Cod. Trab. </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_codigo; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Nombre </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_nombres; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> A. Materno </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_apepat; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> A. Paterno </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_apemat; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> F. Nacimiento </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_fecnac; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> F. Ingreso </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_fecingreso; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Sexo </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_sexo; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Estado Civil </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_estacivil; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Dirección </div>
+
+                                <div class="profile-info-value">
+                                    <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                    <span class="editable" id="country"><?php echo $ficha->retorno[0]->trab_direccion; ?></span>
+                                    <span class="editable" id="city"><?php echo $ficha->retorno[0]->trab_ciudad; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Teléfono </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_telefono; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Email </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->trab_email; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> C. de Costo </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->ccto_codigo; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Cargo </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->detr_cargo; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> AFP </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->afp; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Isapre </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->isapre; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Banco </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->banco; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> N° de cuenta </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->nro_cta; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> N° de cargas </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->detr_nro_cargas; ?></span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Seguro de cesantía </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable" id="username"><?php echo $ficha->retorno[0]->detr_segurocesac; ?></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="space-20"></div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+

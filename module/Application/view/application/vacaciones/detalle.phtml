@@ -1,0 +1,122 @@
+<div class="page-header">
+    <h1>
+        <div class="icon-32-vacation"></div>
+        Solicitud
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Detalle Solicitud #<?php echo $solicitud->getIdSolicitud(); ?>
+        </small>
+    </h1>
+</div>
+
+<form method="GET" action="<?php echo $this->url('application/default', array('controller' => 'vacaciones', 'action' => 'transicion')); ?>">
+    <div col-md-12>
+        <input name="id" type="hidden" value="<?php echo $solicitud->getIdSolicitud(); ?>">
+        <p>
+            <?php if ($solicitud->getEstado()->getCod() == "PENDIENTE"): ?>
+
+                <?php if (!$this->identity()->hasRole('ROL_TRAB')): ?>
+
+                    <button type="submit" name ="action" value = "<?php echo \Application\Model\Entity\Solicitud::ACTION_ACEPTAR; ?>" class="btn btn-sm btn-success">
+                        <i class="ace-icon fa fa-check"></i>
+                        Aprobar
+                    </button>
+                    <button type="submit" name="action" value="<?php echo \Application\Model\Entity\Solicitud::ACTION_RECHAZAR; ?>" class="btn btn-sm btn-danger">
+                        <i class="ace-icon fa fa-bolt bigger-110"></i>
+                        Rechazar
+                    </button>
+                <?php endif; ?>
+                <button type="submit" name="action" value="<?php echo \Application\Model\Entity\Solicitud::ACTION_ANULAR; ?>" class="btn btn-sm btn-default">
+                    <i class="ace-icon fa fa-bolt bigger-110"></i>
+                    Anular
+                </button>
+            <?php endif; ?>
+        </p>
+    </div>
+</form>
+
+<hr>
+
+<div class="col-md-6">
+    <div class="profile-user-info profile-user-info-striped">
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> ID </div>
+            <div class="profile-info-value">
+                <?php echo $solicitud->getIdSolicitud(); ?>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Fecha Solicitud </div>
+            <div class="profile-info-value">
+                <?php echo $solicitud->getFechaIngreso(); ?> 
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Días Hábiles Solicitados </div>
+            <div class="profile-info-value">
+                <span class="label label-lg label-purple arrowed"><?php echo $solicitud->getDiasHabiles(); ?></span>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Fecha Inicio </div>
+            <div class="profile-info-value">
+                <?php echo $solicitud->getFechaInicio(); ?>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Fecha Término </div>
+            <div class="profile-info-value">
+                <?php echo $solicitud->getFechaTermino(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+
+    <img src="<?php echo $this->basePath('/img/vacaciones.png'); ?>" alt="...">
+
+
+    <h3>
+        Estado:
+        <?php if ($solicitud->getEstado()->getCod() == 'PENDIENTE'): ?>
+            <span class="label label-warning arrowed arrowed-right"><?php echo $solicitud->getEstado()->getDescripcion(); ?></span>
+        <?php elseif ($solicitud->getEstado()->getCod() == 'ACEPTADO'): ?>
+            <span class="label label-success arrowed-in arrowed-in-right"><?php echo $solicitud->getEstado()->getDescripcion(); ?></span>
+        <?php elseif ($solicitud->getEstado()->getCod() == 'RECHAZADO'): ?>
+            <span class="label label-danger arrowed-in arrowed-in-right"><?php echo $solicitud->getEstado()->getDescripcion(); ?></span>
+        <?php elseif ($solicitud->getEstado()->getCod() == 'ANULADO'): ?>
+            <span class="label label-inverse arrowed arrowed-in-right"><?php echo $solicitud->getEstado()->getCod(); ?></span>
+        <?php endif; ?>
+    </h3>
+
+    <hr>
+
+    <?php if (!empty($solicitud->getObservaciones())): ?>
+        <div class="itemdiv dialogdiv">
+            <div class="user">
+                <img alt="John's Avatar" src="<?php echo $this->basePath('/avatars/avatar.png'); ?>">
+            </div>
+            <div class="body">
+                <div class="name">
+                    <a href="#">John</a>
+                </div>
+                <div class="text"><?php echo $solicitud->getObservaciones(); ?></div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($solicitud->getEstado()->getCod() == "ACEPTADO"): ?>
+        <h2>Descargar Formulario</h2>
+        <a class="btn btn-white"  href="<?php echo $this->url('application/default', array('controller' => 'certificados', 'action' => 'descargar'), array('query' => array('tipo' => 'FORMVACA', 'id' => $solicitud->getIdSolicitud()))); ?>">
+            <i class="ace-icon fa fa-cloud-download floppy-o bigger-120 blue"></i>
+        </a>
+    <?php endif; ?>
+</div>
+
+</div>

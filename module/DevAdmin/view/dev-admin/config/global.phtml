@@ -1,0 +1,64 @@
+<h3>Configuraci&oacute;n Global</h3>
+<hr>
+
+<form method="POST" action="<?php echo $this->url('devadmin/default', array('controller' => 'roles', 'action' => 'add')); ?>">
+
+    <div class="row">
+
+        <div class="form-group col-md-12" id="controller-container">
+            <label><?php echo $this->formLabel($form->get('title')); ?></label>
+            <?php echo $this->formElement($form->get('title')); ?>
+            <?php if ($this->formElementErrors($form->get('title'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('title')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-12" id="controller-container">
+            <label><?php echo $this->formLabel($form->get('logname')); ?></label>
+            <?php echo $this->formElement($form->get('logname')); ?>
+            <?php if ($this->formElementErrors($form->get('logname'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('logname')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-12" id="controller-container">
+            <label><?php echo $this->formLabel($form->get('logfilter')); ?></label>
+            <?php echo $this->formElement($form->get('logfilter')); ?>
+            <?php if ($this->formElementErrors($form->get('logfilter'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('logfilter')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-12" id="controller-container">
+            <label><?php echo $this->formLabel($form->get('zona')); ?></label>
+            <?php echo $this->formElement($form->get('zona')); ?>
+            <?php if ($this->formElementErrors($form->get('zona'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('zona')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+
+    </div>
+
+    <div>
+
+        <hr>
+        <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            <span>Guardar</span>
+        </button>
+
+        <a href="<?php echo $this->url('devadmin/default', array('controller' => 'roles', 'action' => 'index')); ?>" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span>
+            <span>Volver</span>
+        </a>
+    </div>
+</form>

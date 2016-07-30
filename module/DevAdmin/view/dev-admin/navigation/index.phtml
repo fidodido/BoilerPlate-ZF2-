@@ -1,0 +1,124 @@
+<style>
+    #body-table {
+        cursor: pointer;
+    }
+</style>
+<h3>Navegación</h3>
+
+<hr>
+<a class="btn btn-primary" href="<?php echo $this->url('devadmin/default', array('controller' => 'navigation', 'action' => 'add'), array('query' => array('parent' => $parent))); ?>">
+    <span class="glyphicon glyphicon-plus-sign"></span>
+    Agregar
+</a>
+<hr>
+
+<?php foreach ($this->messages as $msg): ?>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <?php echo $msg['msg']; ?>
+    </div>
+<?php endforeach; ?>
+
+<table class="table table-condensed">
+    <thead>
+        <tr class="warning">
+            <th>Título de Opción</th>
+            <th>Tipo</th>
+            <th>URL</th>
+            <th>Controller/Action</th>
+            <?php if (!isset($parent)): ?>
+                <th>Sub Opciones</th>
+            <?php endif; ?>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody id="body-table">
+        <?php foreach ($pages as $page): ?>
+            <tr>
+                <td>
+                    <?php echo $page['label']; ?>
+                </td>
+                <td><span class="label label-default"><?php echo $page['type']; ?></span></td>
+                <td><?php echo $page['uri']; ?></td>
+                <td><?php echo $page['controller'] . '/' . $page['action']; ?></td>
+                <?php if (!isset($parent)): ?>
+                    <td>
+                        <a href="<?php echo $this->url('devadmin/default', array('controller' => 'navigation', 'action' => 'index'), array('query' => array('parent' => $page['id']))); ?>">Ver&nbsp;(<?php echo count($page['pages']); ?>)</a>
+                    </td>
+                <?php endif; ?>
+                <td>
+                    <a href="<?php echo $this->url('devadmin/default', array('controller' => 'navigation', 'action' => 'edit'), array('query' => array('id' => $page['id']))); ?>">Editar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<hr>
+
+<?php if (isset($parent)): ?>
+    <a class="btn btn-default" href="<?php echo $this->url('devadmin/default', array('controller' => 'navigation', 'action' => 'index')); ?>">
+        <span class="glyphicon glyphicon-share-alt"></span>
+        Volver
+    </a>
+<?php endif; ?>
+<script>
+    $(document).ready(function () {
+
+        var EXTERNAL_URL = "URI";
+        var INTERNAL_URL = 'MVC';
+
+        $("#body-table").sortable();
+
+        var app = {
+            //
+            //
+            init: function () {
+
+                var self = this;
+
+                var optionTypeChecked = $('input[name=optionType]:checked').val();
+                this.hideElements(optionTypeChecked);
+
+                $('input[type=radio][name=optionType]').change(function () {
+                    self.resetForm();
+                    self.hideElements(this.value);
+                });
+            },
+            //
+            //
+            resetForm: function () {
+                $('input[type=text][name=title]').val('');
+                $('input[type=text][name=uri]').val('');
+                $('input[type=text][name=controller]').val('');
+                $('input[type=text][name=action]').val('');
+                $('input[type=text][name=route]').val('');
+            },
+            //
+            //
+            hideElements: function (value) {
+
+                switch (value) {
+                    case INTERNAL_URL:
+                        $('input[type=text][name=uri]').val('');
+                        $('#url-container').hide();
+                        $('#controller-container').show();
+                        $('#action-container').show();
+                        break;
+                    case EXTERNAL_URL:
+                        $('input[type=text][name=uri]').val('');
+                        $('#url-container').show();
+                        $('#controller-container').hide();
+                        $('#action-container').hide();
+                        break;
+                }
+            }
+
+        };
+
+        app.init();
+
+
+    });
+</script>
+

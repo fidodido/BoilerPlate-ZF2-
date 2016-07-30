@@ -1,0 +1,99 @@
+<script language=Javascript>
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+
+<div class="page-header">
+    <h1>
+        Formulario
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Solicitar Vacaciones
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+
+    <form class="form-horizontal" role="form" method="POST">
+
+        <div class="form-group">
+            <?php echo $this->formLabel($form->get('fechaIngreso')); ?>
+            <div class="col-sm-9">
+                <?php echo $this->formElement($form->get('fechaIngreso')); ?>
+            </div>
+        </div>
+
+        <div class="form-group <?php echo $this->formElementErrors($form->get('fechaInicio')) ? 'has-error' : ''; ?>">
+            <?php echo $this->formLabel($form->get('fechaInicio')); ?>
+            <div class="col-xs-12 col-sm-5">
+                <?php echo $this->formElement($form->get('fechaInicio')); ?>
+            </div>
+            <?php if ($this->formElementErrors($form->get('fechaInicio'))): ?>
+                <div class="help-block col-xs-12 col-sm-reset inline">
+                    <?php echo $this->formElementErrors($form->get('fechaInicio')) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group <?php echo $this->formElementErrors($form->get('fechaTermino')) ? 'has-error' : ''; ?>">
+            <?php echo $this->formLabel($form->get('fechaTermino')); ?>
+            <div class="col-xs-12 col-sm-5">
+                <?php echo $this->formElement($form->get('fechaTermino')); ?>
+            </div>
+            <?php if ($this->formElementErrors($form->get('fechaTermino'))): ?>
+                <div class="help-block col-xs-12 col-sm-reset inline">
+                    <?php echo $this->formElementErrors($form->get('fechaTermino')) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group <?php echo $this->formElementErrors($form->get('diasHabiles')) ? 'has-error' : ''; ?>">
+            <?php echo $this->formLabel($form->get('diasHabiles')); ?>
+            <div class="col-xs-12 col-sm-5">
+                <?php echo $this->formElement($form->get('diasHabiles')); ?>
+            </div>
+            <?php if ($this->formElementErrors($form->get('diasHabiles'))): ?>
+                <div class="help-block col-xs-12 col-sm-reset inline">
+                    <?php echo $this->formElementErrors($form->get('diasHabiles')) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <input type="hidden" id="estado_solicitud" name="estado" class="col-md-12 col-xs-12" value = "PENDIENTE"/>
+        <input type="hidden" id="estado_solicitud" name="tipo" class="col-md-12 col-xs-12" value = "VACACIONES"/>
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    Guardar
+                </button>
+                &nbsp; &nbsp; &nbsp;
+                <a href="" class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    Limpiar
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#fecha_inicio,#fecha_termino").datepicker({
+            format: 'dd/mm/yyyy', // mysql
+            viewMode: "days",
+            language: "es",
+        }).next().on(ace.click_event, function () {
+            $(this).prev().focus();
+        });
+    });
+</script>

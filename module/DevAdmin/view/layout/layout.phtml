@@ -1,0 +1,86 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="<?php echo $this->basePath("/css/font-awesome.min.css"); ?>" />
+
+        <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath('/css/select2.min.css'))
+                ->prependStylesheet($this->basePath('/css/bootstrap.min.css'))
+        ?>
+
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()
+                ->prependFile($this->basePath('/js/thirdparty/bootstrap.min.js'))
+                ->prependFile($this->basePath('/js/thirdparty/jquery-ui.custom.min.js'))
+                ->prependFile($this->basePath('/js/thirdparty/select2.min.js'))
+                ->prependFile($this->basePath('/js/thirdparty/jquery.min.js'))
+                ->prependFile($this->basePath('/js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath('/js/html5shiv.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+        ;
+        ?>
+
+        <style>
+
+            .help-inline > ul {
+                list-style-type: none;
+                margin: 0px;
+                padding: 0px;
+            }
+            .help-inline > ul > li
+            {
+                color: red;
+                font-size: 11px;
+                list-style-type: none;
+                margin: 0px;
+                padding: 0px;
+            }
+        </style>
+    </head>
+    <body>
+
+
+        <div class="container">
+
+            <h3>Administración Interna</h3>
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+                        <li role="presentation"><a href="<?php echo $this->url('devadmin/default', array('controller' => 'config', 'action' => 'global')); ?>">Global</a></li>
+                        <li role="presentation"><a href="<?php echo $this->url('devadmin/default', array('controller' => 'navigation', 'action' => 'index')); ?>">Navegación</a></li>
+                        <li role="presentation"><a href="<?php echo $this->url('devadmin/default', array('controller' => 'roles', 'action' => 'index')); ?>">Roles</a></li>
+                        <li role="presentation"><a href="<?php echo $this->url('devadmin/default', array('controller' => 'permission', 'action' => 'index')); ?>">Permisos</a></li>
+                        <li role="presentation"><a href="<?php echo $this->url('devadmin/default', array('controller' => 'users', 'action' => 'index')); ?>">Usuarios</a></li>
+                        <li role="presentation"><a href="<?php echo $this->url('devadmin/default', array('controller' => 'config', 'action' => 'log')); ?>">Log</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-9">
+                    <?php echo $this->content; ?>
+                </div>
+            </div>
+
+            <hr>
+            <footer>
+                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

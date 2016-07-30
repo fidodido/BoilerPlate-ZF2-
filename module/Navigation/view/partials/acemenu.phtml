@@ -1,0 +1,60 @@
+<ul class="nav nav-list">
+    <?php foreach ($this->container as $page): ?>
+
+        <?php
+        // preguntamos si está activa una subpagina.
+
+        $isOpen = "";
+
+        if (!empty($page->pages)) {
+            foreach ($page->pages as $subpage) {
+
+                if ($subpage->isActive()) {
+                    $isOpen = 'open';
+                }
+            }
+        }
+        ?>
+
+        <li class="<?php echo ($page->isActive() ? 'active' : ''); ?> <?php echo $isOpen; ?>" >
+
+            <a href="<?php echo $page->getHref(); ?>" class="<?php echo (!empty($page->pages)) ? 'dropdown-toggle' : ''; ?>">
+                <i class="<?php echo $page->get('icon'); ?>"></i>
+                <span class="menu-text"><?php echo $page->getLabel(); ?></span>
+
+                <?php if (!empty($page->pages)): ?>
+                    <b class="arrow fa fa-angle-down"></b>
+                <?php endif; ?>
+            </a>
+
+            <?php if (!empty($page->pages)): ?>
+
+                <ul class="submenu">
+
+                    <?php foreach ($page->pages as $subpage): ?>
+
+                        <li <?php echo ($subpage->isActive() ? 'class="active"' : ''); ?>>
+
+                            <a href="<?php echo $subpage->getHref(); ?>">
+
+                                <?php if ($subpage->isActive()): ?>
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                <?php endif; ?>
+
+                                <?php echo $subpage->getLabel(); ?>
+
+                            </a>
+                            <?php if ($subpage->isActive()): ?>
+                                <b class="arrow"></b>
+                            <?php endif; ?>
+                        </li>
+
+                    <?php endforeach; ?>
+
+                </ul>
+
+            <?php endif; ?>
+
+        </li>
+    <?php endforeach; ?>
+</ul>

@@ -1,0 +1,26 @@
+<div class="page-header">
+    <h1>
+        Lista de Cumpleaños de Pad!
+    </h1>
+</div>
+
+<?php foreach ($months as $index => $month): ?>
+    <div class="col-md-4">
+        <h4 class="header green">En <?php echo $month; ?></h4>
+        <ul>
+            <?php foreach ($cumpleanos as $cumple): ?>
+                <?php if ($cumple->getMonth() == $index): ?>
+                    <li style="list-style-type: none; margin: 5px;">
+                        <i style="color: #E07F69" class="fa fa-birthday-cake"></i>
+                        <span><?php echo $cumple->getNombre(); ?></span>
+                        <span style="margin-left: 5px; margin-right: 5px;">-</span>
+                        <span>Cumple el:</span>
+                        <span><?php echo $cumple->getFechaNacimiento(); ?></span>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endforeach; ?>
+
+

@@ -1,0 +1,16 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <?php foreach ($this->pages as $page): ?>
+            <?php if (!$page->isActive()): ?>
+                <li>
+                    <i class="<?php echo $page->get('iconCls'); ?>"></i>
+                    <a href="<?php echo $page->getHref(); ?>"><?php echo $page->getLabel(); ?></a>
+                </li>
+            <?php else: ?>
+                <li class="active">
+                    <?php echo $page->getLabel(); ?>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+</div>

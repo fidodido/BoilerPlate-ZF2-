@@ -1,0 +1,21 @@
+.icon-32-vacation {
+    background-image: url('../img/32/vacation.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    width:32px;
+    height:32px;
+}
+
+.icon-32-money {
+    background-image: url('../img/32/money.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    width:32px;
+    height:32px;
+}
+
+.table-solicitudes {
+    cursor: pointer;
+}

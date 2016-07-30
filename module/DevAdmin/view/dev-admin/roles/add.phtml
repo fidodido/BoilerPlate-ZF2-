@@ -1,0 +1,271 @@
+<?php
+$this->headLink()->appendStylesheet($this->basePath('css/jquery.treegrid.css'));
+?>
+
+<?php $this->headScript()->appendFile($this->basePath() . '/js/thirdparty/jquery.treegrid.min.js', 'text/javascript'); ?>
+<?php $this->headScript()->appendFile($this->basePath() . '/js/thirdparty/jquery.treegrid.bootstrap3.js', 'text/javascript'); ?>
+
+<style>
+
+    #available-permission {
+        list-style-type: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #available-permission li, #assigned-permission li {
+        list-style-type: none;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #available-permission li:hover {
+        background: #64FE2E;
+    }
+
+    #assigned-permission li:hover {
+        background: #d43f3a;
+    }
+
+    #assigned-permission {
+        cursor: pointer;
+        list-style-type: none;
+        font-size: 16px;
+    }
+
+    #assigned-permission {
+        list-style-type: none;
+        font-size: 16px;
+    }
+
+</style>
+<h3>Agregar Rol</h3>
+<hr>
+
+<br>
+
+<form method="POST" action="<?php echo $this->url('devadmin/default', array('controller' => 'roles', 'action' => 'add')); ?>">
+
+    <div class="row">
+
+        <div class="form-group col-md-3" id="controller-container">
+            <label><?php echo $this->formLabel($form->get('name')); ?></label>
+            <?php echo $this->formElement($form->get('name')); ?>
+            <?php if ($this->formElementErrors($form->get('name'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('name')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group col-md-6" id="action-container">
+            <label><?php echo $this->formLabel($form->get('description')); ?></label>
+            <?php echo $this->formElement($form->get('description')); ?>
+            <?php if ($this->formElementErrors($form->get('description'))): ?>
+                <span class="help-inline">
+                    <?php echo $this->formElementErrors($form->get('description')) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Configuración de Navegación
+        </div>
+        <table id="tree-table" class="table table-condensed">
+            <?php $count = 0; ?>
+            <?php foreach ($pages as $page): ?>
+                <tr data-id="<?php echo $page['id']; ?>" class="treegrid-<?php echo $page['id']; ?>">
+                    <td>
+                        <span class="<?php echo $page['icon']; ?>"></span>
+                        <?php echo $page['label']; ?>
+                    </td>
+                    <td>
+                        <input type="hidden" name="pages[<?php echo $count; ?>][id]" value="<?php echo $page['id']; ?>">
+                        <input type="hidden" name="pages[<?php echo $count; ?>][checked]" value="0">
+                        <input class="check-parent" type="checkbox" name="pages[<?php echo $count; ?>][checked]" value="1">
+                    </td>
+                </tr>
+                <?php if (!empty($page['pages'])): ?>
+                    <?php foreach ($page['pages'] as $subpage): ?>
+                        <?php $count++; ?>
+                        <tr data-id="<?php echo $subpage['id']; ?>" data-parent="<?php echo $page['id']; ?>" class="treegrid-<?php echo $subpage['id']; ?> treegrid-parent-<?php echo $page['id']; ?>">
+
+                            <td><?php echo $subpage['label']; ?></td>
+                            <td>
+                                <input type="hidden" name="pages[<?php echo $count; ?>][id]" value="<?php echo $subpage['id']; ?>">
+                                <input type="hidden" name="pages[<?php echo $count; ?>][checked]" value="0">
+                                <input class="check-child" type="checkbox" name="pages[<?php echo $count; ?>][checked]" value="1">
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <?php $count++; ?>
+            <?php endforeach; ?>
+        </table>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Permisos
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-condensed">
+                        <ul id="available-permission">
+                            <?php foreach ($permission as $index => $per): ?>
+                                <li data-id="<?php echo $per->getIdPermission(); ?>">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <span><?php echo $per->getName(); ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-condensed">
+                        <ul id="assigned-permission" >
+                        </ul>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            <span>Guardar</span>
+        </button>
+        <a href="<?php echo $this->url('devadmin/default', array('controller' => 'roles', 'action' => 'index')); ?>" class="btn btn-default">
+            <span class="glyphicon glyphicon-share-alt"></span>
+            <span>Cancelar</span>
+        </a>
+    </div>
+
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        $("#tree-table").treegrid({
+            expanderExpandedClass: 'glyphicon glyphicon-minus',
+            expanderCollapsedClass: 'glyphicon glyphicon-plus'
+        });
+
+        var app = {
+            //
+            //
+            init: function () {
+
+                var self = this;
+
+                $('#available-permission').on('click', 'li', function () {
+                    self.asignarPermiso(this);
+                });
+
+                $('#assigned-permission').on('click', 'li', function () {
+                    self.quitarPermiso(this);
+                });
+
+                $(".check-parent").click(function () {
+
+                    var trParent = $(this).parent().parent('tr');
+                    var parentId = trParent.data('id');
+                    var childClass = '.treegrid-parent-' + parentId;
+                    var childTr = $('#tree-table').find(childClass);
+
+                    if ($(this).is(':checked')) {
+
+                        trParent.addClass('success');
+
+                        $.each(childTr, function (index) {
+                            $(this).addClass('success');
+                            $(this).find('input.check-child').prop('checked', true);
+                        });
+
+                    } else {
+
+                        trParent.removeClass('success');
+
+                        $.each(childTr, function (index) {
+                            $(this).removeClass('success');
+                            $(this).find('input.check-child').prop('checked', false);
+                        });
+                    }
+
+                });
+
+                $(".check-child").click(function () {
+
+                    // obtenemos el tr de la fila actual.
+                    var trParent = $(this).parent().parent('tr');
+                    var idParentTr = trParent.data('parent');
+                    var parentTrClass = '.treegrid-' + idParentTr;
+
+
+                    if ($(this).is(':checked')) {
+
+                        // si va a chekiar, automaticamente, debe checkiar al padre.
+                        $(parentTrClass).addClass('success');
+                        $(parentTrClass).find('input.check-parent').prop('checked', true);
+
+                        $(this).parent().parent('tr').addClass('success');
+                    } else {
+
+                        // si va a des-checkiar, debe comprobar que si es
+                        // el ultimo deschekiad, debe deschekiar al padre.
+
+                        var childClass = '.treegrid-parent-' + idParentTr;
+                        var childTr = $('#tree-table').find(childClass);
+
+                        var isTheLastChecked = true;
+
+                        $.each(childTr, function (index) {
+                            if ($(this).find('input.check-child').is(':checked')) {
+                                isTheLastChecked = false;
+                                return false;
+                            }
+                        });
+
+                        if (isTheLastChecked) {
+                            $(parentTrClass).removeClass('success');
+                            $(parentTrClass).find('input.check-parent').prop('checked', false);
+                        }
+
+
+                        $(this).parent().parent('tr').removeClass('success');
+                    }
+
+                });
+
+            },
+            //
+            //
+            asignarPermiso: function (el) {
+
+                var idPermission = $(el).data('id');
+
+                var input = document.createElement('input');
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "permission[id][]");
+                input.setAttribute("value", idPermission);
+
+                $(el).prepend(input);
+                $("#assigned-permission").append(el);
+            },
+            //
+            //
+            quitarPermiso: function (el) {
+                el.remove();
+                $(el).find('input').remove();
+                $("#available-permission").append(el);
+            }
+        }
+
+        app.init();
+
+    });
+</script>

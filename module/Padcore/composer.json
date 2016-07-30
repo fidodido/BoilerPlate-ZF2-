@@ -1,0 +1,22 @@
+{
+    "name": "pad/padcore",
+    "description": "Pad Core - Librerias core.",
+    "license": "public",
+    "authors": [
+        {
+            "name": "José Ibieta",
+            "email": "joseibieta@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Namespace\\": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}

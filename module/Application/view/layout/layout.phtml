@@ -1,0 +1,194 @@
+<?php echo $this->doctype(); ?>
+<html>
+    <head>
+
+        <title>Bienvenido a | PadCRM</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- css & styles -->
+        <link rel="icon" href="<?php echo $this->basePath('/img/favicon.png'); ?>" type="image/x-icon" />
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/css/datepicker.min.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/css/ace.nomodified.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/css/bootstrap-timepicker.min.css" />
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/css/style.css" />
+
+        <!-- scripts -->
+        <script>window.BASE_PATH = '<?php echo $this->basePath(); ?>';</script>
+        <script src="<?php echo $this->basePath(); ?>/js/thirdparty/jquery.min.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/thirdparty/bootstrap.min.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/thirdparty/jquery-ui.custom.min.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/thirdparty/ace-elements.min.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/thirdparty/ace.min.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/thirdparty/ace-extra.min.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/date-time/bootstrap-datepicker.min.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/thirdparty/notify.min.js"></script>
+    </head>
+
+    <body class="no-skin">
+
+        <?php if (isset($messages)): ?>
+            <?php if (!empty($messages)): ?>
+                <div id="alert-messages" style="display: none">
+                    <?php foreach ($messages as $m): ?>
+                        <div data-message="<?php echo $m['message']; ?>" data-classname="<?php echo $m['className']; ?>"></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <div id="navbar" class="navbar navbar-default">
+
+            <script type="text/javascript">
+            try {
+                ace.settings.check('navbar', 'fixed');
+            } catch (e) {
+            }
+            </script>
+
+            <div id="navbar" class="navbar navbar-default">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('navbar', 'fixed');
+                    } catch (e) {
+                    }
+                </script>
+
+                <div class="navbar-container" id="navbar-container">
+                    <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                        <span class="sr-only">Toggle sidebar</span>
+
+                        <span class="icon-bar"></span>
+
+                        <span class="icon-bar"></span>
+
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <div class="navbar-header pull-left">
+                        <a href="#" class="navbar-brand">
+                            <small>
+                                <div class="logo-top "></div>
+                                PadCRM
+                            </small>
+                        </a>
+                    </div>
+
+                    <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                        <ul class="nav ace-nav">
+
+                            <li class="light-blue">
+                                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                    <img class="nav-user-photo" src="<?php echo $this->basePath(); ?>/avatars/avatar1.png" alt="Jason's Photo" />
+                                    <span class="user-info">
+                                        <small>Bienvenido,</small>
+                                        <?php echo $this->identity()->getNombreCompleto(); ?>
+                                    </span>
+
+                                    <i class="ace-icon fa fa-caret-down"></i>
+                                </a>
+                                <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="<?php echo $this->url('cambiarClave'); ?>">
+                                            <i class="ace-icon fa fa-cog"></i>
+                                            Cambio de Password
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo $this->url('application/default', array('controller' => 'usuarios', 'action' => 'perfil')); ?>">
+                                            <i class="ace-icon fa fa-user"></i>
+                                            Perfil
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="<?php echo $this->url('logout'); ?>">
+                                            <i class="ace-icon fa fa-power-off"></i>
+                                            Salir
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container" id="main-container">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('main-container', 'fixed');
+                } catch (e) {
+                }
+            </script>
+
+            <div id="sidebar" class="sidebar responsive">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'fixed');
+                    } catch (e) {
+                    }
+                </script>
+
+                <?php echo $this->navigation('navigation')->menu()->setPartial('acemenu'); ?>
+
+                <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                    <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+                </div>
+
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'collapsed')
+                    } catch (e) {
+                    }
+                </script>
+            </div>
+
+            <div class="main-content">
+                <div class="main-content-inner">
+
+                    <script type="text/javascript">
+                        try {
+                            ace.settings.check('breadcrumbs', 'fixed')
+                        } catch (e) {
+                        }
+                    </script>
+
+                    <?php echo $this->navigation('navigation')->breadcrumbs()->setPartial('acebreadcrumbs'); ?>
+
+                    <div class="page-content">
+                        <?php echo $this->content; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+                if ($("#alert-messages").length) {
+
+                    $("#alert-messages > div").each(function (index) {
+
+                        var className = $(this).data('classname');
+                        var message = $(this).data('message');
+
+                        $.notify(message, {
+                            className: className,
+                            globalPosition: 'bottom center',
+                            style: 'bootstrap',
+                        });
+                    });
+                }
+            });
+
+        </script>
+    </body>
+</html>
